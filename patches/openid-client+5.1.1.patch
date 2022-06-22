@@ -1,0 +1,13 @@
+diff --git a/node_modules/openid-client/lib/helpers/request.js b/node_modules/openid-client/lib/helpers/request.js
+index ad86809..28b6db0 100644
+--- a/node_modules/openid-client/lib/helpers/request.js
++++ b/node_modules/openid-client/lib/helpers/request.js
+@@ -39,7 +39,7 @@ const setDefaults = (props, options) => {
+ 
+ setDefaults([], {
+   headers: { 'User-Agent': `${pkg.name}/${pkg.version} (${pkg.homepage})` },
+-  timeout: 3500,
++  timeout: 30000,
+ });
+ 
+ function send(req, body, contentType) {

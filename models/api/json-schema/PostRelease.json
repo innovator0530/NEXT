@@ -1,0 +1,352 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "ArtistType": {
+            "enum": [
+                "Actor",
+                "Arranger",
+                "Composer",
+                "Engineer",
+                "Lyricist",
+                "Mixer",
+                "Orchestra",
+                "Producer",
+                "Remixer",
+                "featuring",
+                "primary",
+                "with"
+            ],
+            "type": "string"
+        },
+        "BeatFile": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "resolvedUrl": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "FILE"
+                    ],
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "type",
+                "url"
+            ],
+            "type": "object"
+        },
+        "BeatLink": {
+            "properties": {
+                "link": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "LINK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "link",
+                "type"
+            ],
+            "type": "object"
+        },
+        "Language": {
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "code",
+                "name"
+            ],
+            "type": "object"
+        },
+        "PriceCategory": {
+            "enum": [
+                "Back",
+                "Budget",
+                "Front",
+                "Mid",
+                "Premium"
+            ],
+            "type": "string"
+        },
+        "Store": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "type": "object"
+        }
+    },
+    "properties": {
+        "artists": {
+            "items": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "$ref": "#/definitions/ArtistType"
+                    }
+                },
+                "required": [
+                    "id",
+                    "type"
+                ],
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "beatLinksOrFiles": {
+            "items": {
+                "anyOf": [
+                    {
+                        "$ref": "#/definitions/BeatLink"
+                    },
+                    {
+                        "$ref": "#/definitions/BeatFile"
+                    }
+                ]
+            },
+            "type": "array"
+        },
+        "copyright": {
+            "properties": {
+                "owner": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "year": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "owner",
+                "year"
+            ],
+            "type": "object"
+        },
+        "coverUrl": {
+            "minLength": 1,
+            "type": "string"
+        },
+        "explicitLyrics": {
+            "type": "boolean"
+        },
+        "genres": {
+            "properties": {
+                "primaryGenre": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "secondaryGenre": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "primaryGenre",
+                "secondaryGenre"
+            ],
+            "type": "object"
+        },
+        "labelId": {
+            "minLength": 1,
+            "type": "string"
+        },
+        "language": {
+            "$ref": "#/definitions/Language"
+        },
+        "priceCategory": {
+            "$ref": "#/definitions/PriceCategory"
+        },
+        "publishingRights": {
+            "properties": {
+                "owner": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "year": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "owner",
+                "year"
+            ],
+            "type": "object"
+        },
+        "releaseDates": {
+            "properties": {
+                "digital": {
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "original": {
+                    "minLength": 1,
+                    "type": "string"
+                }
+            },
+            "required": [
+                "digital",
+                "original"
+            ],
+            "type": "object"
+        },
+        "stores": {
+            "items": {
+                "$ref": "#/definitions/Store"
+            },
+            "type": "array"
+        },
+        "title": {
+            "minLength": 1,
+            "type": "string"
+        },
+        "tracks": {
+            "items": {
+                "properties": {
+                    "artists": {
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "$ref": "#/definitions/ArtistType"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "type"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "duration": {
+                        "type": "number"
+                    },
+                    "explicitLyrics": {
+                        "type": "boolean"
+                    },
+                    "fileUrl": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "genres": {
+                        "properties": {
+                            "primary": {
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "secondary": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "primary",
+                            "secondary"
+                        ],
+                        "type": "object"
+                    },
+                    "isrc": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "labelId": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "language": {
+                        "$ref": "#/definitions/Language"
+                    },
+                    "metadataLanguage": {
+                        "$ref": "#/definitions/Language"
+                    },
+                    "publishingRights": {
+                        "properties": {
+                            "owner": {
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "year": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "owner",
+                            "year"
+                        ],
+                        "type": "object"
+                    },
+                    "title": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "artists",
+                    "explicitLyrics",
+                    "fileUrl",
+                    "genres",
+                    "isrc",
+                    "labelId",
+                    "language",
+                    "metadataLanguage",
+                    "publishingRights",
+                    "title"
+                ],
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "upc": {
+            "minLength": 1,
+            "type": "string"
+        }
+    },
+    "required": [
+        "artists",
+        "beatLinksOrFiles",
+        "copyright",
+        "coverUrl",
+        "explicitLyrics",
+        "genres",
+        "labelId",
+        "language",
+        "priceCategory",
+        "publishingRights",
+        "releaseDates",
+        "stores",
+        "title",
+        "tracks",
+        "upc"
+    ],
+    "type": "object"
+}
+

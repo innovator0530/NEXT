@@ -1,0 +1,99 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "properties": {
+        "adminContextUser": {
+            "pattern": "^[0-9a-f]{24}$",
+            "type": "string"
+        },
+        "completionStatus": {
+            "enum": [
+                "COMPLETE",
+                "INCOMPLETE"
+            ],
+            "type": "string"
+        },
+        "createdAt": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "email": {
+            "format": "email",
+            "type": "string"
+        },
+        "emailStatus": {
+            "enum": [
+                "FORCE_PASSWORD_RESET",
+                "OK",
+                "VERIFICATION_NEEDED"
+            ],
+            "type": "string"
+        },
+        "emailVerificationCode": {
+            "type": "string"
+        },
+        "emailVerified": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "firstName": {
+            "type": "string"
+        },
+        "image": {
+            "type": "string"
+        },
+        "instagram": {
+            "type": "string"
+        },
+        "lastName": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "passwordHash": {
+            "type": "string"
+        },
+        "paypalEmail": {
+            "type": "string"
+        },
+        "preferredPayment": {
+            "enum": [
+                "PAYPAL",
+                "TWINT"
+            ],
+            "type": "string"
+        },
+        "status": {
+            "enum": [
+                "APPROVAL_NEEDED",
+                "APPROVED",
+                "BANNED"
+            ],
+            "type": "string"
+        },
+        "twintPhoneNumber": {
+            "type": "string"
+        },
+        "type": {
+            "enum": [
+                "ADMIN",
+                "USER"
+            ],
+            "type": "string"
+        }
+    },
+    "required": [
+        "completionStatus",
+        "createdAt",
+        "email",
+        "emailStatus",
+        "emailVerified",
+        "firstName",
+        "lastName",
+        "passwordHash",
+        "status",
+        "type"
+    ],
+    "type": "object"
+}
+

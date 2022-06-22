@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
+@font-face {
+	font-family: "TT Commons W01 Bold";
+	src: url("/fonts/7d35d1f9-668e-42b2-a6b2-9009f0aa3ed4.woff2") format("woff2"),
+		url("/fonts/23a70446-ff80-4d9d-a429-94bc68bb5c97.woff") format("woff");
+}
+
+
+* {
+	padding: 0;
+	margin: 0;
+	font-family: "Inter", sans-serif;
+	font-weight: 400;
+}
+
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+h1 {
+	font-family: "TT Commons W01 Bold";
+	font-size: 96px;
+	font-weight: 700;
+	color: white;
+	margin-bottom: 20px;
+	line-height: 100%;
+}
+
+h2 {
+	font-family: "TT Commons W01 Bold";
+	font-size: 72px;
+	font-weight: 700;
+	color: white;
+	margin-bottom: 10px;
+	line-height: 100%;
+}
+
+h3 {
+	font-size: 34px;
+	font-weight: 400;
+	color: white;
+}
+h4 {
+	font-size: 28px;
+	font-weight: 400;
+	color: white;
+}
+
+h5 {
+	font-size: 18px;
+	font-weight: 400;
+	color: white;
+}
+
+h6 {
+	font-size: 16px;
+	font-weight: 400;
+	color: white;
+	margin-bottom: 16px;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+@media screen and (max-width: 800px) {
+	h1 {
+		font-size: 48px;
+	}
+
+	h2 {
+		font-size: 32px;
+	}
+
+	h3 {
+		font-size: 16px;
+	}
+
+	h4 {
+		font-size: 14px;
+	}
+
+	h5 {
+		font-size: 16px;
+	}
+}

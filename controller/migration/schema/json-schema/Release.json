@@ -1,0 +1,345 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "ArtistType": {
+            "enum": [
+                "Actor",
+                "Arranger",
+                "Composer",
+                "Engineer",
+                "Lyricist",
+                "Mixer",
+                "Orchestra",
+                "Producer",
+                "Remixer",
+                "featuring",
+                "primary",
+                "with"
+            ],
+            "type": "string"
+        },
+        "IDBFreeBeat": {
+            "properties": {
+                "link": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "FILE",
+                        "LINK"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "type"
+            ],
+            "type": "object"
+        },
+        "IDBReleaseArtist": {
+            "properties": {
+                "artistId": {
+                    "pattern": "^[0-9a-f]{24}$",
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/ArtistType"
+                }
+            },
+            "required": [
+                "artistId",
+                "type"
+            ],
+            "type": "object"
+        },
+        "IDBSoundtrack": {
+            "properties": {
+                "artists": {
+                    "items": {
+                        "$ref": "#/definitions/IDBReleaseArtist"
+                    },
+                    "type": "array"
+                },
+                "duration": {
+                    "type": "number"
+                },
+                "explicit": {
+                    "type": "boolean"
+                },
+                "fileUrl": {
+                    "pattern": "^REWAVE-ASSETS-STORAGE:\\/\\/assets\\/users\\/[0-9a-f]{24}\\/upload_[0-9a-f]{24,40}[a-z_\\.]{3,20}$",
+                    "type": "string"
+                },
+                "fugaAssetId": {
+                    "type": "integer"
+                },
+                "isrc": {
+                    "type": "string"
+                },
+                "language": {
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "code",
+                        "name"
+                    ],
+                    "type": "object"
+                },
+                "metadataLanguage": {
+                    "properties": {
+                        "code": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "code",
+                        "name"
+                    ],
+                    "type": "object"
+                },
+                "musicLabelId": {
+                    "pattern": "^[0-9a-f]{24}$",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "primaryGenre": {
+                    "minLength": 2,
+                    "type": "string"
+                },
+                "publishingRightsBy": {
+                    "type": "string"
+                },
+                "publishingRightsYear": {
+                    "type": "number"
+                },
+                "secondaryGenre": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "artists",
+                "explicit",
+                "fileUrl",
+                "fugaAssetId",
+                "isrc",
+                "language",
+                "metadataLanguage",
+                "musicLabelId",
+                "name",
+                "primaryGenre",
+                "publishingRightsBy",
+                "publishingRightsYear"
+            ],
+            "type": "object"
+        },
+        "PriceCategory": {
+            "enum": [
+                "Back",
+                "Budget",
+                "Front",
+                "Mid",
+                "Premium"
+            ],
+            "type": "string"
+        },
+        "ReleaseStatus": {
+            "enum": [
+                "ACTION_NEEDED",
+                "APPROVED",
+                "DRAFT",
+                "PENDING",
+                "REJECTED"
+            ],
+            "type": "string"
+        }
+    },
+    "properties": {
+        "approvalCheckedOff": {
+            "type": "boolean"
+        },
+        "artists": {
+            "items": {
+                "$ref": "#/definitions/IDBReleaseArtist"
+            },
+            "type": "array"
+        },
+        "copyrightBy": {
+            "minLength": 1,
+            "type": "string"
+        },
+        "copyrightYear": {
+            "type": "number"
+        },
+        "coverUrl": {
+            "pattern": "^REWAVE-ASSETS-STORAGE:\\/\\/assets\\/users\\/[0-9a-f]{24}\\/upload_[0-9a-f]{24,40}[a-z_\\.]{3,20}$",
+            "type": "string"
+        },
+        "digitalReleaseDate": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "explicit": {
+            "type": "boolean"
+        },
+        "freeBeats": {
+            "items": {
+                "$ref": "#/definitions/IDBFreeBeat"
+            },
+            "type": "array"
+        },
+        "fugaProductId": {
+            "type": "integer"
+        },
+        "isProcessing": {
+            "type": "boolean"
+        },
+        "language": {
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "name": {
+                    "minLength": 1,
+                    "type": "string"
+                }
+            },
+            "required": [
+                "code",
+                "name"
+            ],
+            "type": "object"
+        },
+        "lastActionTime": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "moderationComment": {
+            "type": "string"
+        },
+        "musicLabelId": {
+            "pattern": "^[0-9a-f]{24}$",
+            "type": "string"
+        },
+        "originalReleaseDate": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "priceCategory": {
+            "$ref": "#/definitions/PriceCategory"
+        },
+        "primaryGenre": {
+            "minLength": 2,
+            "type": "string"
+        },
+        "publishingRightsBy": {
+            "minLength": 1,
+            "type": "string"
+        },
+        "publishingRightsYear": {
+            "type": "number"
+        },
+        "rejectionReason": {
+            "type": "string"
+        },
+        "rewaveId": {
+            "pattern": "^REWAVE[0-9]{8}$",
+            "type": "string"
+        },
+        "secondaryGenre": {
+            "type": "string"
+        },
+        "soundtracks": {
+            "description": "items.minLength 1",
+            "items": {
+                "$ref": "#/definitions/IDBSoundtrack"
+            },
+            "type": "array"
+        },
+        "status": {
+            "$ref": "#/definitions/ReleaseStatus"
+        },
+        "stores": {
+            "items": {
+                "properties": {
+                    "id": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "name": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "type": "object"
+            },
+            "type": "array"
+        },
+        "submitted": {
+            "format": "date-time",
+            "type": "string"
+        },
+        "timesSubmitted": {
+            "type": "number"
+        },
+        "title": {
+            "minLength": 1,
+            "type": "string"
+        },
+        "upc": {
+            "pattern": "^auto|[0-9]{12,13}$",
+            "type": "string"
+        },
+        "user": {
+            "pattern": "^[0-9a-f]{24}$",
+            "type": "string"
+        }
+    },
+    "required": [
+        "artists",
+        "copyrightBy",
+        "copyrightYear",
+        "coverUrl",
+        "digitalReleaseDate",
+        "explicit",
+        "freeBeats",
+        "fugaProductId",
+        "language",
+        "lastActionTime",
+        "musicLabelId",
+        "originalReleaseDate",
+        "priceCategory",
+        "primaryGenre",
+        "publishingRightsBy",
+        "publishingRightsYear",
+        "rewaveId",
+        "soundtracks",
+        "status",
+        "stores",
+        "submitted",
+        "timesSubmitted",
+        "title",
+        "upc",
+        "user"
+    ],
+    "type": "object"
+}
+
