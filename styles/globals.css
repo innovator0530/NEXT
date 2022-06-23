@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
+
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
 @font-face {
 	font-family: "TT Commons W01 Bold";
 	src: url("/fonts/7d35d1f9-668e-42b2-a6b2-9009f0aa3ed4.woff2") format("woff2"),
@@ -87,4 +89,7 @@ h6 {
 	h5 {
 		font-size: 16px;
 	}
+}
+.tab{
+	cursor: pointer;
 }

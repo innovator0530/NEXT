@@ -6,13 +6,17 @@ import { IUserDocument } from "@models/database/user/interface";
 
 const USER_PAGE_LIMIT = 15
 
-const searchQueryUsers = async ({searchTerm,exclusiveStartEmail}:{searchTerm:string,exclusiveStartEmail?:string}):Promise<Pick<IUserDocument,'id'|'email'|'firstName'|'lastName'|'createdAt'>[]> =>{
+const searchQueryUsers = async ({searchTerm,exclusiveStartEmail}:{searchTerm:string,exclusiveStartEmail?:string}):Promise<Pick<IUserDocument,'id'|'email'|'firstName'|'lastName'|'createdAt'|'status'>[]> =>{
         const searchTermLowerCase = searchTerm.toLowerCase();
-        const allUsers = await User.find({type:'USER'},{email:1,firstName:1,lastName:1,createdAt:1}).sort({email:1});
-        const foundUsers = allUsers.filter(u=>{
+        const allUsers = await User.find({type:'USER'},{email:1,firstName:1,lastName:1,createdAt:1,status:1}).sort({email:1}); 
+        const releases = await Release.find({status:{$ne:'DRAFT'}},{user:1,upc:1});
+        const foundUsers = allUsers.filter((u)=>{
             const email = u.email.toLowerCase();
+           
             if(email.includes(searchTermLowerCase)){return true;}
-            const fullName = `${u.firstName} ${u.lastName}`;
+            if(releases.reduce((acc,curr)=>(String(curr.user)==u.id && curr.upc===searchTerm)?++acc:acc,0)){
+                return true;}  
+            const fullName = `${u.firstName} ${u.lastName}`; 
             if(fullName.includes(searchTermLowerCase)){return true;}
         });
         if(exclusiveStartEmail){
@@ -39,7 +43,8 @@ export interface IUserQueryResult{
     payoutsCount:number,
     releasesCount:number,
     trackCount:number,
-    rejectedCount:number
+    rejectedCount:number,
+    status:string
 }
 
 export const queryUsers = async({searchTerm,exclusiveStartEmail}:{searchTerm?:string,exclusiveStartEmail?:string}):Promise<{
@@ -47,16 +52,15 @@ export const queryUsers = async({searchTerm,exclusiveStartEmail}:{searchTerm?:st
 }>=>{
 
     // Query users
-    let users:Pick<IUserDocument,'id'|'email'|'firstName'|'lastName'|'createdAt'>[];
+    let users:Pick<IUserDocument,'id'|'email'|'firstName'|'lastName'|'createdAt'|'status'>[];
     if(searchTerm){
         users = await searchQueryUsers({searchTerm,exclusiveStartEmail});
         console.log('users', users);
     }
     else{
         const filterQuery:any = exclusiveStartEmail ? {type:'USER',email:{$gt:exclusiveStartEmail}} : {type:'USER'};
-        users = await User.find(filterQuery,{email:1,firstName:1,lastName:1,createdAt:1}).sort({email:1}).limit(USER_PAGE_LIMIT)
+        users = await User.find(filterQuery,{email:1,firstName:1,lastName:1,createdAt:1,status:1}).sort({email:1}).limit(USER_PAGE_LIMIT)
     }
-    
     // Add metadata
     const resultList:IUserQueryResult[] = []
     for(let i = 0; i<users.length;i++){
@@ -78,7 +82,8 @@ export const queryUsers = async({searchTerm,exclusiveStartEmail}:{searchTerm?:st
             payoutsCount: payouts.length,
             releasesCount: releases.length,
             trackCount,
-            rejectedCount
+            rejectedCount,
+            status:user.status
         })
     }
 

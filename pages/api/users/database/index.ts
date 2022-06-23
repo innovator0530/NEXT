@@ -27,7 +27,6 @@ handler
 			}
 			// console.log('exclusiveStartEmail,searchTerm', exclusiveStartEmail,searchTerm);
 			const users = (await queryUsers(params)).users
-
 			res.status(200).send({ users })
 		} catch (e) {
 			console.log("e", e)

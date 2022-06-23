@@ -6,7 +6,7 @@ export const Container = styled.div`
 
 export const ListHeader = styled.div`
 	display: grid;
-	grid-template-columns: 25% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+	grid-template-columns: 16% 12% 12% 12% 12% 12% 12% 12%;
 	color: #000000;
 	opacity: 0.35;
 	font-weight: 600;
@@ -18,7 +18,7 @@ export const ListHeader = styled.div`
 export const ListRow = styled.div`
     cursor: pointer;
 	display: grid;
-	grid-template-columns: 25% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+	grid-template-columns: 16% 12% 12% 12% 12% 12% 12% 12%;
 	color: #000000;
 	opacity: 0.8;
 	padding: 24px 14px;
