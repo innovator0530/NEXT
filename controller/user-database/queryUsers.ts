@@ -59,7 +59,7 @@ export const queryUsers = async({searchTerm,exclusiveStartEmail}:{searchTerm?:st
     }
     else{
         const filterQuery:any = exclusiveStartEmail ? {type:'USER',email:{$gt:exclusiveStartEmail}} : {type:'USER'};
-        users = await User.find(filterQuery,{email:1,firstName:1,lastName:1,createdAt:1,status:1}).sort({email:1}).limit(USER_PAGE_LIMIT)
+        users = await User.find(filterQuery,{email:1,firstName:1,lastName:1,createdAt:1,status:1}).sort({email:1})
     }
     // Add metadata
     const resultList:IUserQueryResult[] = []
@@ -83,7 +83,7 @@ export const queryUsers = async({searchTerm,exclusiveStartEmail}:{searchTerm?:st
             releasesCount: releases.length,
             trackCount,
             rejectedCount,
-            status:user.status
+            status:user.status=="APPROVED"?"APPROVED":"NOT APPROVED"
         })
     }
 

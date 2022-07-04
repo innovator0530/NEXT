@@ -43,9 +43,9 @@ const UserDatabaseList:FC<{
 		if(event.currentTarget.id =="Tab-8")
 			val = "status";
 		if(sortDir > 0)
-			data = data.sort((a, b) => a[val]>b[val]?1:-1);
-		else
 			data = data.sort((a, b) => a[val]<b[val]?1:-1);
+		else
+			data = data.sort((a, b) => a[val]>b[val]?1:-1);
 		setResult(data);
 		setSortIndex(event.currentTarget.id);
 	}
